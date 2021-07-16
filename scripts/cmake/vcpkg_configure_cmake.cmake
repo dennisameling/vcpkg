@@ -228,6 +228,8 @@ function(vcpkg_configure_cmake)
             set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${SCRIPTS}/toolchains/openbsd.cmake")
         elseif(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "MinGW")
             set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${SCRIPTS}/toolchains/mingw.cmake")
+        elseif(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "LLVM_MinGW")
+            set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${SCRIPTS}/toolchains/llvm-mingw.cmake")
         endif()
     endif()
 

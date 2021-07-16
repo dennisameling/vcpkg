@@ -6,6 +6,8 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH MASTER_COPY_SOURCE_PATH
     ARCHIVE "${ARCHIVE}"
     REF ${OPENSSL_VERSION}
+    PATCHES
+        unix/openssl-1.1.1-mingw-arm.patch
 )
 
 if(CMAKE_HOST_WIN32)

@@ -21,16 +21,15 @@ foreach(lang C CXX)
   set(CMAKE_${lang}_COMPILER_TARGET "${CMAKE_SYSTEM_PROCESSOR}-windows-gnu" CACHE STRING "")
 endforeach()
 
-#find_program(CMAKE_C_COMPILER "${CMAKE_SYSTEM_PROCESSOR}-w64-mingw32-clang.exe")
-#find_program(CMAKE_CXX_COMPILER "${CMAKE_SYSTEM_PROCESSOR}-w64-mingw32-clang++.exe")
-#find_program(CMAKE_RC_COMPILER "${CMAKE_SYSTEM_PROCESSOR}-w64-mingw32-windres.exe")
-if(NOT CMAKE_RC_COMPILER)
-    #find_program(CMAKE_RC_COMPILER "windres.exe")
+if(NOT DEFINED ENV{LLVM_PATH})
+    message(FATAL_ERROR "LLVM_PATH env variable not set")
 endif()
 
-set(CMAKE_C_COMPILER "F:/git-sdk-64/usr/src/llvm-build/llvm-mingw-20210423-ucrt-x86_64/bin/aarch64-w64-mingw32-clang.exe")
-set(CMAKE_CXX_COMPILER "F:/git-sdk-64/usr/src/llvm-build/llvm-mingw-20210423-ucrt-x86_64/bin/aarch64-w64-mingw32-clang++.exe")
-set(CMAKE_RC_COMPILER "F:/git-sdk-64/usr/src/llvm-build/llvm-mingw-20210423-ucrt-x86_64/bin/aarch64-w64-mingw32-windres.exe")
+set(LLVM_PATH $ENV{LLVM_PATH})
+
+set(CMAKE_C_COMPILER "${LLVM_PATH}/bin/${CMAKE_SYSTEM_PROCESSOR}-w64-mingw32-clang.exe")
+set(CMAKE_CXX_COMPILER "${LLVM_PATH}/bin/${CMAKE_SYSTEM_PROCESSOR}-w64-mingw32-clang++.exe")
+set(CMAKE_RC_COMPILER "${LLVM_PATH}/bin/${CMAKE_SYSTEM_PROCESSOR}-w64-mingw32-windres.exe")
 
 get_property( _CMAKE_IN_TRY_COMPILE GLOBAL PROPERTY IN_TRY_COMPILE )
 if(NOT _CMAKE_IN_TRY_COMPILE)
